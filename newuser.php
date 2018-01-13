@@ -141,6 +141,11 @@ include ("polaczenia.php");
 				{
 					$wynik = mysqli_query ($polaczenie, "INSERT INTO user (imie,nazwisko,email,haslo,status) VALUES ('". $imie."','".$nazwisko."','".$email."','".$haslo."','".$status."')");
 					
+					
+					$wynik1  = mysqli_query ($polaczenie,"SELECT id FROM  user WHERE (email = '$email')")or die('Błąd zapytania do tabeli!');	
+			while ($wiersz = mysqli_fetch_array ($wynik))
+{	$idusera=$wiersz [0];}
+					
 if(mkdir('/home/tomkappl/domains/tomkap.pl/public_html/zad7/'.$email, 0777))
 {
 	 echo 'Udało się stworzyć katalogu';
