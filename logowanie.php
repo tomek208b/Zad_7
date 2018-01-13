@@ -33,6 +33,10 @@ echo " id : ".$idusera;
           //$_SESSION['user'] = $idusera;
 		  setcookie("id",$idusera,time()+360);
 		  setcookie("login",$wys_login,time()+360);
+		  
+		  
+		  
+		  
 			echo "<p><font size='5' color='green'>Udało Ci się zalogować :)</font></p></br>";     
 		   header("Location: index.php");
 			}

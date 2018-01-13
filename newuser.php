@@ -154,7 +154,9 @@ else
 {
  echo 'Nie udało się stworzyć katalogu';
 }
-$zapytanie1= mysqli_query ($polaczenie, "INSERT INTO pliki (iduser,sciezka,	rodzaj, nazwa) VALUES ('".$idusera."','".$email."','1','".$email."')")	or die('Błąd zapytania do tabeli kliencimkir!');
+$sciezka='/home/tomkappl/domains/tomkap.pl/public_html/zad7/'.$email;
+$stary='/home/tomkappl/domains/tomkap.pl/public_html/zad7/';
+$zapytanie1= mysqli_query ($polaczenie, "INSERT INTO pliki (iduser,sciezka,	rodzaj, nazwa,stary) VALUES ('".$idusera."','".$sciezka."','1','".$email."','".$stary."')")	or die('Błąd zapytania do tabeli kliencimkir!');
 					if ($wynik)
 					{                                                                             // jakies przekierowaie  do logowania , jakies hiper lacze 
 						echo "<center><table border='1px' BGCOLOR='green'><tr><td align='center'>";

@@ -7,8 +7,13 @@ ob_start();
 //include ("sesia.php");
 include ("cookis.php");
 //$id=$_SESSION['user'];
+
+
+
+
   setcookie("imie",$wys_login,time()+360);
 $id=$_COOKIE['id'];
+$login=$_COOKIE['login'];
 $wynik  = mysqli_query ($polaczenie,"SELECT imie FROM  user WHERE (id = '$id')")or die('Błąd zapytania do tabeli!');	
 			while ($wiersz = mysqli_fetch_array ($wynik))
 {	$imie=$wiersz [0];
@@ -70,42 +75,65 @@ ob_end_flush();
  <input type="submit" value="Wyślij plik"/>
  </form>
 
+ <?php
+ 
+   $folder = ($_POST['folder']);
+@$rej1 = trim($_REQUEST["rej1"]);
+     
+			if ($rej1 == "rej1"){
+				
+				if(mkdir('/home/tomkappl/domains/tomkap.pl/public_html/zad7/'.$login.'/'.$folder, 0777))
+					{
+					echo 'Udało się stworzyć katalogu';
+					}
+					else
+					{
+					echo 'Nie udało się stworzyć katalogu';
+					}
+				
+			}
+
+?>
+<form action="" method="post">
+<input type="hidden" name="rej1" value="rej1">
+
+<p class='tytul'></p>
+Nazwa folderu:<br/>
+<input type="text" name="folder" class="textbox"size="30" maxlength="50" />
+
+<input type="submit" name="logowanie" value="dodaj">
+<br/><br/><br/>
+</form>
+
+
+</center> 
 	
 <?php
 
-$directory = $_COOKIE["cookie"];
+$directory = $_COOKIE["login"];
 $dir = opendir($directory);
 echo "Lista plików:<BR />";
  
  
 while($file_name = readdir($dir))  {
 	 if (($file_name != ".") && ($file_name != "..")) {
-		 include ("$directory/$file_name");
-	   echo "<a href='".$directory."/".$file_name."'>".$file_name."<br> </a>";
+		 
+	  echo $file_name."<a href='pobierz.php?p=".$file_name."'>pobierz<br> </a>";
+      
+
 	 }
-	 
 }
 
 closedir($dir);
 
+
+
+
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </center> 
 </body>
 </html>
-
 
 
