@@ -143,8 +143,8 @@ include ("polaczenia.php");
 					
 					
 					$wynik1  = mysqli_query ($polaczenie,"SELECT id FROM  user WHERE (email = '$email')")or die('Błąd zapytania do tabeli!');	
-			while ($wiersz = mysqli_fetch_array ($wynik))
-{	$idusera=$wiersz [0];}
+			while ($wiersz3 = mysqli_fetch_array ($wynik1))
+{	$idusera=$wiersz3 [0];}
 					
 if(mkdir('/home/tomkappl/domains/tomkap.pl/public_html/zad7/'.$email, 0777))
 {
@@ -154,7 +154,7 @@ else
 {
  echo 'Nie udało się stworzyć katalogu';
 }
-$zapytanie1= mysqli_query ($polaczenie, "INSERT INTO pliki (iduser,sciezka,	rodzaj) VALUES ('". $idusera."','".$email."','1')")	or die('Błąd zapytania do tabeli kliencimkir!');
+$zapytanie1= mysqli_query ($polaczenie, "INSERT INTO pliki (iduser,sciezka,	rodzaj, nazwa) VALUES ('".$idusera."','".$email."','1','".$idusera."')")	or die('Błąd zapytania do tabeli kliencimkir!');
 					if ($wynik)
 					{                                                                             // jakies przekierowaie  do logowania , jakies hiper lacze 
 						echo "<center><table border='1px' BGCOLOR='green'><tr><td align='center'>";
