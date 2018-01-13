@@ -154,7 +154,7 @@ else
 {
  echo 'Nie udało się stworzyć katalogu';
 }
-$zapytanie1= mysqli_query ($polaczenie, "INSERT INTO pliki (iduser,sciezka,	rodzaj, nazwa) VALUES ('".$idusera."','".$email."','1','".$idusera."')")	or die('Błąd zapytania do tabeli kliencimkir!');
+$zapytanie1= mysqli_query ($polaczenie, "INSERT INTO pliki (iduser,sciezka,	rodzaj, nazwa) VALUES ('".$idusera."','".$email."','1','".$email."')")	or die('Błąd zapytania do tabeli kliencimkir!');
 					if ($wynik)
 					{                                                                             // jakies przekierowaie  do logowania , jakies hiper lacze 
 						echo "<center><table border='1px' BGCOLOR='green'><tr><td align='center'>";
