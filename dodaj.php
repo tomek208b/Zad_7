@@ -22,26 +22,16 @@ foreach ($przegladarka as $nazwa => $id)
 			while ($wiersz = mysqli_fetch_array ($wynik))
 {	$email=$wiersz [0];}
    
-echo "to jest ciekawe : ".$email." efewsf ";
+
 $zapytanie= mysqli_query ($polaczenie, "INSERT INTO loguser (user,ip,data,OS,przegladarka,stan) VALUES ('". $idusera."','".$_SERVER['REMOTE_ADDR']."','".$czas."','".$system."','".$przegladarka."','".$error."')")	or die('Błąd zapytania do tabeli klienci!');
 
-$wynik4  = mysqli_query ($polaczenie,"SELECT id FROM pliki WHERE (iduser = '$idusera')")or die('Błąd zapytania do tabeli!');	
-$wiersz4 = mysqli_fetch_array ($wynik4);
-if(!isset($wiersz4))	
-	{
+
+	
 		
 
 
-if(mkdir('/home/tomkappl/domains/tomkap.pl/public_html/zad7/'.$email, 0777))
-{
-	 echo 'Udało się stworzyć katalogu';
-}
-else
-{
- echo 'Nie udało się stworzyć katalogu';
-}
-$zapytanie1= mysqli_query ($polaczenie, "INSERT INTO pliki (iduser,sciezka) VALUES ('". $idusera."','".$email."')")	or die('Błąd zapytania do tabeli kliencimkir!');
-	}
+
+	
 
 if($error=='1')
 {

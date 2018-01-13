@@ -141,7 +141,15 @@ include ("polaczenia.php");
 				{
 					$wynik = mysqli_query ($polaczenie, "INSERT INTO user (imie,nazwisko,email,haslo,status) VALUES ('". $imie."','".$nazwisko."','".$email."','".$haslo."','".$status."')");
 					
-
+if(mkdir('/home/tomkappl/domains/tomkap.pl/public_html/zad7/'.$email, 0777))
+{
+	 echo 'Udało się stworzyć katalogu';
+}
+else
+{
+ echo 'Nie udało się stworzyć katalogu';
+}
+$zapytanie1= mysqli_query ($polaczenie, "INSERT INTO pliki (iduser,sciezka,	rodzaj) VALUES ('". $idusera."','".$email."','1')")	or die('Błąd zapytania do tabeli kliencimkir!');
 					if ($wynik)
 					{                                                                             // jakies przekierowaie  do logowania , jakies hiper lacze 
 						echo "<center><table border='1px' BGCOLOR='green'><tr><td align='center'>";
