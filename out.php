@@ -4,6 +4,8 @@ include ("cookis.php");
 
 setcookie("id","0",time());
 unset($_COOKIE['id']);
+setcookie("login","",time());
+unset($_COOKIE['login']);
 
 /*include ("sesia.php");
 if(isset($_SESSION['user']))

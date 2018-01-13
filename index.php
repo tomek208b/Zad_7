@@ -7,10 +7,14 @@ ob_start();
 //include ("sesia.php");
 include ("cookis.php");
 //$id=$_SESSION['user'];
+  setcookie("imie",$wys_login,time()+360);
 $id=$_COOKIE['id'];
 $wynik  = mysqli_query ($polaczenie,"SELECT imie FROM  user WHERE (id = '$id')")or die('Błąd zapytania do tabeli!');	
 			while ($wiersz = mysqli_fetch_array ($wynik))
-{	$imie=$wiersz [0];}
+{	$imie=$wiersz [0];
+
+}
+
 echo "<p><font size='5' color='green'>Witaj ".$imie."</font></p></br>";
 $wynik1  = mysqli_query ($polaczenie,"SELECT * FROM  loguser WHERE (user = '$id') ORDER BY id DESC  LIMIT 1,1 ")or die('Błąd zapytania do tabeli!');	
 			while ($wiersz1 = mysqli_fetch_array ($wynik1))
@@ -25,7 +29,7 @@ echo "<p><font size='5' color='red'> Ktoś próbował sie zalogować nie poprawn
 }
 
 
-echo "</br></br><a href='out.php'>Wyloguj</a></br>";
+echo "</br></br><a href='out.php'>Wyloguj</a></br></br>";
 
 
 ob_end_flush();
@@ -44,46 +48,53 @@ if(isset($_COOKIE['id']))
 {
 
 
+@$rej = trim($_REQUEST["rej"]);
+     
+			if ($rej == "rej"){
 
-
-  
-	 if($_GET['akcja']=='up')
-	 {
-		echo"<br><a href='index.php?akcja=back'>powrót</a><br>" ;	 	 
-include ("dodajzgloszenie.php");
-
-		
-	 }		
-     else {  if($_GET['akcja']=='ut'&&$_GET['id']>'0')
-				 
-	 {		
-
-	echo"<br><a href='index.php?akcja=ut'>powrót</a><br>" ;
-include ("odpowiedz.php");
-	 }		 else{
-		 if($_GET['akcja']=='ut')
-	 {
-		
-	echo"<br><a href='index.php?akcja=back'>powrót</a><br>" ;
-include ("userview.php");
-
-	 }		 
-	  else
-	  {	    
-echo "<a href='index.php?akcja=up'>Zgłoś problem</a><br>";
-echo "<a href='index.php?akcja=ut'>Problemy w toku</a><br>";
-
-	 }}}
+				if(isset($_COOKIE["cookie"])){
+					echo "Witaj: ".$_COOKIE["cookie"];
+					
+				}
 	
+
+
+}}
+ob_end_flush();
+?>	
+
+
+ </br><form action="odbierz.php" method="POST" ENCTYPE="multipart/form-data">
+ <input type="hidden" name="rej" value="rej">
+ <input type="file" name="plik"/>
+ <input type="submit" value="Wyślij plik"/>
+ </form>
+
+	
+<?php
+
+$directory = $_COOKIE["cookie"];
+$dir = opendir($directory);
+echo "Lista plików:<BR />";
+ 
+ 
+while($file_name = readdir($dir))  {
+	 if (($file_name != ".") && ($file_name != "..")) {
+		 include ("$directory/$file_name");
+	   echo "<a href='".$directory."/".$file_name."'>".$file_name."<br> </a>";
+	 }
+	 
 }
 
+closedir($dir);
 
-
-
-
-
-ob_end_flush();
 ?>
+
+
+
+
+
+
 
 
 
