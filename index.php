@@ -1,11 +1,13 @@
 <?php
-session_start();
+//session_start();
 
 include ("polaczenia.php");
 
 ob_start();
-include ("sesia.php");
-$id=$_SESSION['user'];
+//include ("sesia.php");
+include ("cookis.php");
+//$id=$_SESSION['user'];
+$id=$_COOKIE['id'];
 $wynik  = mysqli_query ($polaczenie,"SELECT imie FROM  user WHERE (id = '$id')")or die('Błąd zapytania do tabeli!');	
 			while ($wiersz = mysqli_fetch_array ($wynik))
 {	$imie=$wiersz [0];}
@@ -23,7 +25,7 @@ echo "<p><font size='5' color='red'> Ktoś próbował sie zalogować nie poprawn
 }
 
 
-echo "</br></br><a href='out.php?akcja=wyloguj'>Wyloguj</a></br>";
+echo "</br></br><a href='out.php'>Wyloguj</a></br>";
 
 
 ob_end_flush();
@@ -38,8 +40,11 @@ ob_end_flush();
 
 <?php
 
-if(isset($_SESSION['user']))
+if(isset($_COOKIE['id']))
 {
+
+
+
 
   
 	 if($_GET['akcja']=='up')
@@ -72,62 +77,8 @@ echo "<a href='index.php?akcja=ut'>Problemy w toku</a><br>";
 	
 }
 
-if(isset($_SESSION['work']))
-{
-	
-		 if($_GET['akcja']=='wr')
-			 {
-				 	echo"<br><a href='index.php?akcja=back'>powrót</a><br>" ;
-					include ("sortuj.php");
-			 }else{
-				  if($_GET['akcja']=='wp'&&$_GET['id']>'0')
-				 
-	 {		
 
-	echo"<br><a href='index.php?akcja=wp'>powrót</a><br>" ;
-include ("konwersacja.php");
-	 }		 
-	  else
-	     
-	        {	
-				if($_GET['akcja']=='wp')
-	 {		
-	echo"<br><a href='index.php?akcja=back'>powrót</a><br>" ;
-include ("workview.php");
-	 }		 
-	  else	{	
-				echo "<a href='index.php?akcja=wr'>Wszystkie zgłoszenia</a><br>"; 
-				echo "<a href='index.php?akcja=wp'>Obsługiwane zgłoszenia</a><br>";
-				
-			}}
-}}
 
-if(isset($_SESSION['admin']))
-{
-			 if($_GET['akcja']=='ar')
-			 {
-				 	echo"<br><a href='index.php?akcja=back'>powrót</a><br>" ;
-					include ("nework.php");
-			 }else{
-				 
-				 if($_GET['akcja']=='ap')
-	 {		
-	echo"<br><a href='index.php?akcja=back'>powrót</a><br>" ;
-include ("adminviewp.php");
-	 }		 
-	  else
-	        {	if($_GET['akcja']=='ak')
-	 {		
-	echo"<br><a href='index.php?akcja=back'>powrót</a><br>" ;
-include ("adminviewk.php");
-	 }		 
-	  else
-	        {	  
-				echo "<a href='index.php?akcja=ar'>Rejestracja pracownika</a><br>"; 
-				echo "<a href='index.php?akcja=ap'>Rejestr pracowników </a><br>";
-				echo "<a href='index.php?akcja=ak'>Rejestr klientów </a><br>";}}
-			 }
-}
 
 
 

@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 ob_start();
 include ("polaczenia.php");
   $wys_login = ($_POST['email']);
@@ -23,14 +23,17 @@ $wynik = mysqli_query ($polaczenie,"SELECT id,haslo,status FROM  user WHERE (ema
 $idusera=$wiersz [0];
 $pass = $wiersz [1];
 $statususer=$wiersz [2];}
+
+echo " id : ".$idusera;
 	if (!empty($pass))
 	{
 			if($pass==$wys_pass&&$statususer<'3')
 			{		
 		  $error='0';
-          $_SESSION['user'] = $idusera;
+          //$_SESSION['user'] = $idusera;
+		  setcookie("id",$idusera,time()+360);
 			echo "<p><font size='5' color='green'>Udało Ci się zalogować :)</font></p></br>";     
-		   
+		   header("Location: index.php");
 			}
 			else{ if($statususer>='3')
 				{
@@ -45,17 +48,26 @@ $statususer=$wiersz [2];}
 				}
 	            }
 	if(isset($error)){
+		
+		
 	include ("dodaj.php");}
+	
+	
+	
 	 }
 
 	else{
 		echo "<p><font size='5' color='red'>Nie udało się tobie zalogować</font></p></br>";	
 	}
 	
-if(isset($_SESSION['user']))
-{
-header("Location: index.php");
-}	
+	
+//if(isset($_COOKIE['id'])&&($_COOKIE['id']>0)){
+  // echo "Ciasteczko istnieje";
+//header("Location: index.php");}
+//else{
+//echo "Brak ciastecza o nazwie aktywacja";}
+
+
 
 
 ob_end_flush();
